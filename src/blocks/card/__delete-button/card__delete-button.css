@@ -5,7 +5,6 @@
   /*Потом это будет из модификатора*/
   background-size: 18px 18px;
   border: none;
-  cursor: pointer;
   position: absolute;
   top: 18px;
   right: 15px;
@@ -16,8 +15,17 @@
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
+  visibility: hidden;
+  cursor: none;
+  pointer-events: none;
 }
 
 .card__delete-button:hover {
   opacity: 0.6;
+}
+
+.card__delete-button_visible{
+  visibility: visible;
+  pointer-events: all;
+  cursor: pointer;
 }
