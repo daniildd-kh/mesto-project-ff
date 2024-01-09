@@ -13,12 +13,15 @@ import {
 const profileName = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileAvatar = document.querySelector(".profile__image");
-const profileEditButton = document.querySelector(".profile__edit-button")
+const profileEditButton = document.querySelector(".profile__edit-button");
 const popupProfileEdit = document.querySelector(".popup_type_edit");
-const popupProfileEditSubmitButtom = popupProfileEdit.querySelector('.popup__button');
+const popupProfileEditSubmitButtom =
+  popupProfileEdit.querySelector(".popup__button");
 const popupProfileEditForm = popupProfileEdit.querySelector(".popup__form");
 const popupInputName = document.querySelector(".popup__input_type_name");
-const popupInputDescription = document.querySelector(".popup__input_type_description");
+const popupInputDescription = document.querySelector(
+  ".popup__input_type_description"
+);
 
 const cardList = document.querySelector(".places__list");
 const popupCardImage = document.querySelector(".popup_type_image");
@@ -29,13 +32,18 @@ const addNewCardButton = document.querySelector(".profile__add-button");
 const popupNewCard = document.querySelector(".popup_type_new-card");
 const popupNewCardSubmitButton = popupNewCard.querySelector(".popup__button");
 const popupNewCardForm = popupNewCard.querySelector(".popup__form");
-const popupInputNewCardName = document.querySelector(".popup__input_type_card-name");
+const popupInputNewCardName = document.querySelector(
+  ".popup__input_type_card-name"
+);
 const popupInputNewCardLink = document.querySelector(".popup__input_type_url");
 
 const popupAvatarEdit = document.querySelector(".popup_type_edit-avatar");
-const popupAvatarEditSubmitButton = popupAvatarEdit.querySelector(".popup__button");
+const popupAvatarEditSubmitButton =
+  popupAvatarEdit.querySelector(".popup__button");
 const popupAvatarEditForm = popupAvatarEdit.querySelector(".popup__form");
-const popupInputAvatarLink = document.querySelector(".popup__input_type_avatar-url");
+const popupInputAvatarLink = document.querySelector(
+  ".popup__input_type_avatar-url"
+);
 const popups = document.querySelectorAll(".popup");
 
 const validationConfig = {
@@ -45,7 +53,7 @@ const validationConfig = {
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible",
-}
+};
 
 function openCard(event) {
   popupCardImageImg.src = event.target.src;
@@ -98,30 +106,9 @@ popups.forEach((popup) => {
   });
 });
 
-profileEditButton.addEventListener('click', hendleProfileEditButton);
-profileAvatar.addEventListener('click', hendleProfileAvatar);
-addNewCardButton.addEventListener('click', hendleAddNewCardButton);
-
-function hendleProfileEditButton(){
-  openPopup(popupProfileEdit);
-  popupInputName.value = profileName.textContent;
-  popupInputDescription.value = profileDescription.textContent;
-  popupProfileEditForm.addEventListener("submit", handleProfileEditContentSubmit);
-  clearValidation(popupProfileEditForm, validationConfig);
-}
-function hendleProfileAvatar(){
-  openPopup(popupAvatarEdit);
-  popupAvatarEditForm.reset();
-  popupAvatarEditForm.addEventListener("submit", handleAvatarEditSubmit);
-  clearValidation(popupAvatarEditForm, validationConfig);
-}
-
-function hendleAddNewCardButton(){
-  popupNewCardForm.reset();
-  openPopup(popupNewCard);
-  popupNewCardForm.addEventListener("submit", handleAddNewCardSubmit);
-  clearValidation(popupNewCardForm, validationConfig);
-};
+profileEditButton.addEventListener("click", handleProfileEditButton);
+profileAvatar.addEventListener("click", handleProfileAvatar);
+addNewCardButton.addEventListener("click", handleAddNewCardButton);
 
 function renderLoading(isLoading, button) {
   if (isLoading) {
@@ -129,6 +116,30 @@ function renderLoading(isLoading, button) {
   } else {
     button.textContent = "Сохранить";
   }
+}
+
+function handleProfileEditButton() {
+  openPopup(popupProfileEdit);
+  popupInputName.value = profileName.textContent;
+  popupInputDescription.value = profileDescription.textContent;
+  popupProfileEditForm.addEventListener(
+    "submit",
+    handleProfileEditContentSubmit
+  );
+  clearValidation(popupProfileEditForm, validationConfig);
+}
+function handleProfileAvatar() {
+  openPopup(popupAvatarEdit);
+  popupAvatarEditForm.reset();
+  popupAvatarEditForm.addEventListener("submit", handleAvatarEditSubmit);
+  clearValidation(popupAvatarEditForm, validationConfig);
+}
+
+function handleAddNewCardButton() {
+  popupNewCardForm.reset();
+  openPopup(popupNewCard);
+  popupNewCardForm.addEventListener("submit", handleAddNewCardSubmit);
+  clearValidation(popupNewCardForm, validationConfig);
 }
 
 function handleProfileEditContentSubmit(event) {
