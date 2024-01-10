@@ -55,10 +55,10 @@ const validationConfig = {
   errorClass: "popup__error_visible",
 };
 
-function openCard(event) {
-  popupCardImageImg.src = event.target.src;
-  popupCardImageImg.alt = event.target.alt;
-  popupCardImageCaption.textContent = event.target.alt;
+function openCard(cardTitle, cardLink) {
+  popupCardImageImg.src = cardLink;
+  popupCardImageImg.alt = cardTitle;
+  popupCardImageCaption.textContent = cardTitle;
   openPopup(popupCardImage);
 }
 
@@ -71,10 +71,7 @@ function addNewCard(createdCard) {
 }
 
 Promise.all([initialCards(), initialProfileData("me")])
-  .then((initialData) => {
-    const initialCardsHendler = initialData[0];
-    const profileData = initialData[1];
-
+  .then(([initialCardsHendler, profileData]) => {
     initialCardsHendler.forEach((card) => {
       const createdCard = makeCard(
         card,
@@ -109,6 +106,9 @@ popups.forEach((popup) => {
 profileEditButton.addEventListener("click", handleProfileEditButton);
 profileAvatar.addEventListener("click", handleProfileAvatar);
 addNewCardButton.addEventListener("click", handleAddNewCardButton);
+popupProfileEditForm.addEventListener("submit", handleProfileEditContentSubmit);
+popupAvatarEditForm.addEventListener("submit", handleAvatarEditSubmit);
+popupNewCardForm.addEventListener("submit", handleAddNewCardSubmit);
 
 function renderLoading(isLoading, button) {
   if (isLoading) {
@@ -122,23 +122,17 @@ function handleProfileEditButton() {
   openPopup(popupProfileEdit);
   popupInputName.value = profileName.textContent;
   popupInputDescription.value = profileDescription.textContent;
-  popupProfileEditForm.addEventListener(
-    "submit",
-    handleProfileEditContentSubmit
-  );
   clearValidation(popupProfileEditForm, validationConfig);
 }
 function handleProfileAvatar() {
   openPopup(popupAvatarEdit);
   popupAvatarEditForm.reset();
-  popupAvatarEditForm.addEventListener("submit", handleAvatarEditSubmit);
   clearValidation(popupAvatarEditForm, validationConfig);
 }
 
 function handleAddNewCardButton() {
   popupNewCardForm.reset();
   openPopup(popupNewCard);
-  popupNewCardForm.addEventListener("submit", handleAddNewCardSubmit);
   clearValidation(popupNewCardForm, validationConfig);
 }
 
